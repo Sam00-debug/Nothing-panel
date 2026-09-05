@@ -1,5 +1,8 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sam00-debug/C-/refs/heads/main/Np%20Admins%20cmds"))()
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+local lp = Players.LocalPlayer
+
 local function Moon(Star)
     local Cloud = {
         a="ᴀ",b="ʙ",c="ᴄ",d="ᴅ",e="ᴇ",f="ꜰ",g="ɢ",h="ʜ",i="ɪ",j="ᴊ",k="ᴋ",l="ʟ",m="ᴍ",
@@ -30,8 +33,8 @@ task.spawn(function()
     if not River or not Stone then return end
 
     local Mountain = Color3.new(1, 0, 0)
-    local Valley = Moon("😈 Nothing Music [1000+ ids]")
-    local Hill = Moon("nothing music 1k ids")
+    local Valley = Moon("Nothing Panel")
+    local Hill = Moon("_" .. lp.DisplayName .. "_")
 
     pcall(function()
         River:FireServer("PickingRPBioColor", Mountain)
