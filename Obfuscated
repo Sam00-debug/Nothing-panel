@@ -4,6 +4,9 @@ local UserInputService = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 local ld = loadstring
 local runserver = game
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+
 
 --===============================
 --=== ROLE PLAY NAME AND RGB ===
@@ -28,7 +31,7 @@ pcall(function()
         ReplicatedStorage:WaitForChild("RE", 10):WaitForChild("1RPNam1eTex1t", 10) :FireServer("RolePlayName", rpName)
          ReplicatedStorage:WaitForChild("RE", 10):WaitForChild("1RPNam1eTex1t", 10) :FireServer("BioPlayName", bioName)
     end)
-    end)
+    
 
 
 
