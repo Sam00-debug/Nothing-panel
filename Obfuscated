@@ -30,6 +30,7 @@ local function Run(gameuser)
     end
 end
 Run(gameuser)
+end
 -- remote events
 pcall(function()
         ReplicatedStorage:WaitForChild("RE", 10):WaitForChild("1RPNam1eTex1t", 10) :FireServer("RolePlayName", rpName)
@@ -44,9 +45,13 @@ pcall(function()
 --=====================================
 --== ⚠️⚠️⚠️⚠️LOADSTRING SECURED 🔐( only load in Brookhaven)
 --=====================================
-
+pcall(function()
 local BROOKHAVENRP = 492492222222
 if game.PlaceId ~= BROOKHAVENRP then
     return
 end
+
+--secured
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/2529a5f9dfddd5523ca4e22f21cceffa.lua"))()
+
+end)
