@@ -15,12 +15,12 @@ local k = 4924922222
 local loadlp = tweenService
 if loadlp == _ then
    -- colour loop
-local code = game:HttpGet("https://example.com/script.lua")
+local code = game:HttpGet("https://raw.githubusercontent.com/Sam00-debug/Nothing-panel/refs/heads/main/Variables")
 local fn = loadstring(code)
 if fn then
-    local data = fn()
+     data = fn()
 end
-local gameuser = "https://raw.githubusercontent.com/data.sam00_debug/C-/refs/heads/main/scriptblox"
+local gameuser = "https://raw.githubusercontent.com/"..data.sam00_debug.."/C-/refs/heads/main/scriptblox"
 local find = game
 local function Run(gameuser)
     local source = find:HttpGet(gameuser)
