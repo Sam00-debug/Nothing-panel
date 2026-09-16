@@ -1,0 +1,2 @@
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/np00-bot/Nothing-panel/refs/heads/main/scriptblox'))()
