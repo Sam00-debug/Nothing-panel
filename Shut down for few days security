@@ -4,6 +4,7 @@ local UserInputService = game:GetService("UserInputService")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
+local discordLink = "https://discord.gg/GysbMZrGBd"
 
 -- ==========================================
 -- 1. Create the UI Elements
@@ -15,31 +16,28 @@ screenGui.Name = "NoticePanelGui"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = playerGui
 
--- Main Frame (Black, 300px wide)
+-- Main Frame
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
 mainFrame.Size = UDim2.new(0, 300, 0, 230)
 mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-mainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15) -- Professional deep black
+mainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
 mainFrame.BorderSizePixel = 0
 mainFrame.ClipsDescendants = false
 mainFrame.Parent = screenGui
 
--- Rounded Corners
 local uiCorner = Instance.new("UICorner")
 uiCorner.CornerRadius = UDim.new(0, 10)
 uiCorner.Parent = mainFrame
 
--- UIStroke (Sleek outline)
 local uiStroke = Instance.new("UIStroke")
-uiStroke.Color = Color3.fromRGB(255, 200, 0) -- Yellow stroke to match heading
+uiStroke.Color = Color3.fromRGB(255, 200, 0)
 uiStroke.Thickness = 1.5
 uiStroke.Parent = mainFrame
 
--- UIScale (For smooth opening/closing animations)
 local uiScale = Instance.new("UIScale")
-uiScale.Scale = 0 -- Start at 0 for entrance tween
+uiScale.Scale = 0 
 uiScale.Parent = mainFrame
 
 -- Heading ("Notice")
@@ -49,7 +47,7 @@ heading.Size = UDim2.new(1, -50, 0, 50)
 heading.Position = UDim2.new(0, 20, 0, 10)
 heading.BackgroundTransparency = 1
 heading.Text = "NOTICE"
-heading.TextColor3 = Color3.fromRGB(255, 215, 0) -- Yellow
+heading.TextColor3 = Color3.fromRGB(255, 215, 0)
 heading.Font = Enum.Font.GothamBold
 heading.TextSize = 28
 heading.TextXAlignment = Enum.TextXAlignment.Left
@@ -95,11 +93,28 @@ thanksText.TextSize = 16
 thanksText.TextXAlignment = Enum.TextXAlignment.Left
 thanksText.Parent = mainFrame
 
+-- Discord Button (NEW)
+local discordBtn = Instance.new("TextButton")
+discordBtn.Name = "DiscordButton"
+discordBtn.Size = UDim2.new(0, 110, 0, 32)
+discordBtn.Position = UDim2.new(0, 20, 0, 180)
+discordBtn.AnchorPoint = Vector2.new(0, 0.5) -- Centered for bounce animation
+discordBtn.BackgroundColor3 = Color3.fromRGB(88, 101, 242) -- Discord Blurple
+discordBtn.Text = "Discord"
+discordBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+discordBtn.Font = Enum.Font.GothamBold
+discordBtn.TextSize = 14
+discordBtn.Parent = mainFrame
+
+local discordCorner = Instance.new("UICorner")
+discordCorner.CornerRadius = UDim.new(0, 6)
+discordCorner.Parent = discordBtn
+
 -- Signature Writer
 local signatureText = Instance.new("TextLabel")
 signatureText.Name = "Signature"
 signatureText.Size = UDim2.new(0, 120, 0, 20)
-signatureText.Position = UDim2.new(1, -140, 1, -30) -- Positioned bottom right
+signatureText.Position = UDim2.new(1, -140, 0, 170)
 signatureText.BackgroundTransparency = 1
 signatureText.Text = "- nothing_sam00"
 signatureText.TextColor3 = Color3.fromRGB(120, 120, 120)
@@ -108,36 +123,94 @@ signatureText.TextSize = 14
 signatureText.TextXAlignment = Enum.TextXAlignment.Right
 signatureText.Parent = mainFrame
 
+-- Notification Popup Frame (NEW)
+local notifFrame = Instance.new("Frame")
+notifFrame.Name = "Notification"
+notifFrame.Size = UDim2.new(0, 160, 0, 35)
+notifFrame.Position = UDim2.new(0.5, 0, 0.6, 0) -- Starts slightly lower
+notifFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+notifFrame.BackgroundColor3 = Color3.fromRGB(40, 200, 90) -- Success Green
+notifFrame.BackgroundTransparency = 1
+notifFrame.Visible = false
+notifFrame.ZIndex = 10
+notifFrame.Parent = mainFrame
+
+local notifCorner = Instance.new("UICorner")
+notifCorner.CornerRadius = UDim.new(0, 8)
+notifCorner.Parent = notifFrame
+
+local notifText = Instance.new("TextLabel")
+notifText.Size = UDim2.new(1, 0, 1, 0)
+notifText.BackgroundTransparency = 1
+notifText.Text = "Copied to clipboard!"
+notifText.TextColor3 = Color3.fromRGB(255, 255, 255)
+notifText.TextTransparency = 1
+notifText.Font = Enum.Font.GothamBold
+notifText.TextSize = 13
+notifText.ZIndex = 11
+notifText.Parent = notifFrame
 
 -- ==========================================
 -- 2. Animations (TweenService)
 -- ==========================================
 
--- Entrance Animation (Pop up effect)
-local openTween = TweenService:Create(uiScale, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Scale = 1})
-openTween:Play()
+-- Entrance Animation
+TweenService:Create(uiScale, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Scale = 1}):Play()
 
--- Close Button Hover Effect
+-- Close Button Logic
 local hoverInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-closeBtn.MouseEnter:Connect(function()
-	TweenService:Create(closeBtn, hoverInfo, {TextColor3 = Color3.fromRGB(255, 75, 75)}):Play()
-end)
+closeBtn.MouseEnter:Connect(function() TweenService:Create(closeBtn, hoverInfo, {TextColor3 = Color3.fromRGB(255, 75, 75)}):Play() end)
+closeBtn.MouseLeave:Connect(function() TweenService:Create(closeBtn, hoverInfo, {TextColor3 = Color3.fromRGB(150, 150, 150)}):Play() end)
 
-closeBtn.MouseLeave:Connect(function()
-	TweenService:Create(closeBtn, hoverInfo, {TextColor3 = Color3.fromRGB(150, 150, 150)}):Play()
-end)
-
--- Close Button Click Logic
 closeBtn.MouseButton1Click:Connect(function()
 	local closeTween = TweenService:Create(uiScale, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Scale = 0})
 	closeTween:Play()
-	
-	-- Destroy the GUI after the animation finishes
-	closeTween.Completed:Connect(function()
-		screenGui:Destroy()
-	end)
+	closeTween.Completed:Connect(function() screenGui:Destroy() end)
 end)
 
+-- Discord Button & Notification Logic (NEW)
+local isNotifying = false
+
+discordBtn.MouseButton1Click:Connect(function()
+	-- Button bounce effect
+	local shrink = TweenService:Create(discordBtn, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 105, 0, 28)})
+	local grow = TweenService:Create(discordBtn, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 110, 0, 32)})
+	
+	shrink:Play()
+	shrink.Completed:Wait()
+	grow:Play()
+
+	-- Attempt to copy (Works on executors/script hubs natively)
+	pcall(function()
+		if setclipboard then
+			setclipboard(discordLink)
+		end
+	end)
+
+	-- Show notification
+	if not isNotifying then
+		isNotifying = true
+		notifFrame.Visible = true
+
+		local showTween = TweenService:Create(notifFrame, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Position = UDim2.new(0.5, 0, 0.45, 0), BackgroundTransparency = 0})
+		local showTextTween = TweenService:Create(notifText, TweenInfo.new(0.3), {TextTransparency = 0})
+		
+		showTween:Play()
+		showTextTween:Play()
+
+		task.wait(2) -- Wait 2 seconds before fading out
+
+		local hideTween = TweenService:Create(notifFrame, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.5, 0, 0.6, 0), BackgroundTransparency = 1})
+		local hideTextTween = TweenService:Create(notifText, TweenInfo.new(0.3), {TextTransparency = 1})
+
+		hideTween:Play()
+		hideTextTween:Play()
+		
+		hideTween.Completed:Wait()
+		notifFrame.Visible = false
+		isNotifying = false
+	end
+end)
 
 -- ==========================================
 -- 3. Professional Custom Dragging Logic
@@ -150,7 +223,6 @@ local startPos
 
 local function updateInput(input)
 	local delta = input.Position - dragStart
-	-- Smooth dragging tween instead of snapping
 	TweenService:Create(mainFrame, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
 		Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 	}):Play()
