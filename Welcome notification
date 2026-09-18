@@ -1,0 +1,17 @@
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+
+local discord = "https://discord.gg/GysbMZrGBd"
+
+-- Copy Discord invite
+if setclipboard then
+    setclipboard(discord)
+end
+
+-- Notification
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "NOTHING PANEL",
+    Text = "welcome to nothing panel !!, join discord",
+    Duration = 15
+})
