@@ -1,1 +1,22 @@
-cloudfare 
+-- get code only if game is BrookhavenRP 
+
+local HttpService = game:GetService("HttpService")
+local GameID = game.gameId -- BrookhavenRP if
+local GameId = _G.GameId 
+if not GameId then
+    warn("GameId is missing")
+    return
+end
+
+-- request for code
+local response = request({
+    Url = "https://YOUR-WORKER.workers.dev/validate",
+    Method = "POST",
+    Headers = {
+        ["Content-Type"] = "application/json"
+    },
+    Body = HttpService:JSONEncode({
+        Id = GameId
+        ID = GameID
+    })
+})
