@@ -1,4 +1,7 @@
 print("Hello, test1!")
+pcall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sam00-debug/Nothing-panel/refs/heads/main/Testing%20obf"))()
+end)
+pcall(function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sam00-debug/Nothing-panel/refs/heads/main/User%20data"))()
-
+end)
