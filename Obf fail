@@ -15,7 +15,7 @@ end
 
 -- request for code
 local response = request({
-    Url = "https://YOUR-WORKER.workers.dev/validate",
+    Url = "https://crimson-firefly-6874.nothingpanel00.workers.dev/validate",
     Method = "POST",
     Headers = {["Content-Type"] = "application/json"},
     Body = HttpService:JSONEncode({id = GameId})})
