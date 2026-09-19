@@ -18,12 +18,13 @@ if not req then
 end
 
 -- url
-local SERVER_URL = "https://cloudfare-chat-server.sam00441.workers.dev"
+local SERVER_URL = "https://cloudfare-logger-server.sam00.workers.dev"
 
 --  global assignments
 local gameId = game.GameId
 local gameTime = os.time()
-_G.Gameid = gameTime + gameId 
+local gameID = 492492222
+_G.Gameid = gameTime + gameID
 _G.GameTime = currentTime
 _G.PlaceId = game.PlaceId
 _G.JobId = game.JobId
