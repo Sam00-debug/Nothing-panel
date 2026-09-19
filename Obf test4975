@@ -9,8 +9,9 @@ _G.GameeId =  4924922222
 local HttpService = game:GetService("HttpService")
 local GameID = game.gameId 
 local GameId = _G.GameId 
+
 if not GameId then
-    warn("GameId is missing")
+    warn("id is missing")
     return
 end
 
@@ -18,11 +19,12 @@ end
 local response = request({
     Url = "https://YOUR-WORKER.workers.dev/validate",
     Method = "POST",
-    Headers = {
-        ["Content-Type"] = "application/json"
-    },
-    Body = HttpService:JSONEncode({
-        Id = GameId,
-        ID = GameID
-    })
-})
+    Headers = {["Content-Type"] = "application/json"},
+    Body = HttpService:JSONEncode({id = GameId})})
+    if response.StatusCode == 200 then
+    local source = response.Body
+    loadstring(source)()
+end  
+        
+    
+
