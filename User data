@@ -64,3 +64,4 @@ end)
 if not success then
     warn("Failed to send data:", response)
 end
+print("Hello, user data!")
