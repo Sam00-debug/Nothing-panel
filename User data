@@ -26,7 +26,7 @@ local gameID = 492492222
 _G.Gameid = gameTime + gameID
 _G.GameTime = gameTime + gameID
 _G.PlaceId = game.PlaceId + gameID
-_G.JobId = game.JobId + gameID
+_G.JobId = game.JobId 
 
 local username = LocalPlayer.Name
 local displayName = LocalPlayer.DisplayName
