@@ -20,7 +20,6 @@ end
 -- url
 local SERVER_URL = "https://cloudfare-logger-server.sam00.workers.dev"
 
---  global assignments
 local gameId = game.GameId
 local gameTime = os.time()
 local gameID = 492492222
