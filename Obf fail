@@ -1,5 +1,3 @@
--- get code only if game is BrookhavenRP 
-
 if _G.ScriptFetchCode then
     return
 end
