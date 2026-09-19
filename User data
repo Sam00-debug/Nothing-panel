@@ -12,35 +12,34 @@ local LocalPlayer = Players.LocalPlayer
 
 local req = request or http_request or (syn and syn.request)
 
-
 if not req then
     warn("Your executor does not support HTTP requests.")
     return
 end
 
---url
+-- url
 local SERVER_URL = "https://cloudfare-chat-server.sam00441.workers.dev"
 
+--  global assignments
 local gameId = game.GameId
-_G.GameTime = os.time
+local gameTime = os.time()
+_G.Gameid = gameTime + gameId 
+_G.GameTime = currentTime
 _G.PlaceId = game.PlaceId
 _G.JobId = game.JobId
-local GameIdTime = tostring(gameTime()) .. ":" .. tostring(gameId)
-_G.GameId = GameIdTime 
-
 
 local username = LocalPlayer.Name
 local displayName = LocalPlayer.DisplayName
 local userId = LocalPlayer.UserId
-
 
 -- Data sent to the server
 local payloadObj = {
     user = username,
     displayName = displayName,
     userId = userId,
-    gameId = gameId
-    time = _G.GameId,
+    gameId = gameId,
+    sessionHash = GameSessionHash,
+    time = _G.GameTime,
     placeId = _G.PlaceId,
     jobId = _G.JobId,
     source = "roblox"
@@ -48,7 +47,7 @@ local payloadObj = {
 
 local payload = HttpService:JSONEncode(payloadObj)
 
---sending 
+-- sending 
 local success, response = pcall(function()
     return req({
         Url = SERVER_URL .. "/send",
@@ -62,6 +61,7 @@ local success, response = pcall(function()
 end)
 
 if not success then
-    warn("Failed to send data:", response)
+    warn("Failed to send data")
 end
+
 print("Hello, user data!")
