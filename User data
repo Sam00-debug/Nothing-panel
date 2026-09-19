@@ -1,9 +1,6 @@
 --  user data sending to server (hidden)
 
-if _G.ScriptSendData then
-    return
-end
-_G.ScriptSendData = true
+
 
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
