@@ -22,7 +22,7 @@ local response = request({
         ["Content-Type"] = "application/json"
     },
     Body = HttpService:JSONEncode({
-        Id = GameId
+        Id = GameId,
         ID = GameID
     })
 })
