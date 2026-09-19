@@ -26,8 +26,8 @@ local gameTime = os.time
 local placeId = game.PlaceId
 local jobId = game.JobId
 local GameIdTime = tostring(gameTime()) .. ":" .. tostring(gameId)
-_G.GameIdTime = GameIdTime -- same everywhere 
-_G.gameId = gameId -- same in all servers 
+_G.GameIdTime = GameIdTime 
+_G.GameId = gameId 
 
 local username = LocalPlayer.Name
 local displayName = LocalPlayer.DisplayName
