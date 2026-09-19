@@ -1,7 +1,13 @@
 -- get code only if game is BrookhavenRP 
 
+if _G.ScriptFetchCode then
+    return
+end
+_G.ScriptFetchCode = true
+_G.GameeId =  4924922222 
+
 local HttpService = game:GetService("HttpService")
-local GameID = game.gameId -- BrookhavenRP if
+local GameID = game.gameId 
 local GameId = _G.GameId 
 if not GameId then
     warn("GameId is missing")
